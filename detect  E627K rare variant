@@ -1,0 +1,9 @@
+gzip -d sample_1.Q30clean.fq.gz
+gzip -d sample_2.Q30clean.fq.gz
+bwa mem -t 4 Reference.fa sample_1.Q30clean.fq sample_2.Q30clean.fq > sampleS6.sam
+picard ReorderSam -I sampleS6.sam -O sampleS6.samreorder.sam -SD Reference.dict
+samtools view -S -b sampleS6.samreorder.sam > sampleS6.bam
+samtools sort sampleS6.bam -o sampleS6.sorted.bam
+samtools index sampleS6.sorted.bam
+lofreq call-parallel --pp-threads 4 -f Reference.fa -o samplesortbamlofreq.vcf sampleS6.sorted.bam
+
