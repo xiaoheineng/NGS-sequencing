@@ -1,3 +1,4 @@
+fastp -i sample_1.fq.gz -I sample_2.fq.gz -o sample_1.Q30clean.fq.gz -O sample_2.Q30clean.fq.gz -q 30 -u 50 -n 15 -l 150
 gzip -d sample_1.Q30clean.fq.gz
 gzip -d sample_2.Q30clean.fq.gz
 bwa mem -t 4 Reference.fa sample_1.Q30clean.fq sample_2.Q30clean.fq > sampleS6.sam
